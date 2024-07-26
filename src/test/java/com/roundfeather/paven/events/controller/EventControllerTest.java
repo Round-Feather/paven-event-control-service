@@ -1,5 +1,6 @@
 package com.roundfeather.paven.events.controller;
 
+import com.roundfeather.paven.events.config.SubscriptionConfig;
 import com.roundfeather.paven.utils.events.repository.EventControlRepository;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
@@ -9,15 +10,22 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @QuarkusTest
 class EventControllerTest {
+
+    @InjectMock
+    SubscriptionConfig subscriptionConfig;
 
     @InjectMock
     EventControlRepository repository;
 
     @Test
     void testEventRequest() {
+
+        when(subscriptionConfig.subscriptions())
+                .thenReturn(Map.of("projects/myproject/subscriptions/mysubscription", "calculations"));
 
         String body = "{\n" +
                 "      \"message\": {\n" +
