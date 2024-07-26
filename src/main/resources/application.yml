@@ -1,0 +1,23 @@
+quarkus:
+  application:
+    name: paven-event-control-service
+  log:
+    category:
+      "com.roundfeather.paven":
+        level: DEBUG
+  index-dependency:
+    paven-client-util:
+      group-id: com.roundfeather.paven.utils
+      artifact-id: paven-client-utils
+  smallrye-openapi:
+    store-schema-directory: target/openapi
+
+app:
+  datastore:
+    kind:
+      usersKind: users
+      eventControl: eventControl
+
+  subscriptions:
+    projects/myproject/subscriptions/mysubscription: calculations
+
